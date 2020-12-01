@@ -1,0 +1,48 @@
+<template>
+    <div class="app slds-p-around_x-large">
+        <lightning-layout>
+            <lightning-layout-item padding="around-small">
+                {greeting}
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                {time} 
+            </lightning-layout-item>
+        </lightning-layout>
+    
+        <lightning-layout>
+            <lightning-layout-item padding="around-small">
+                <lightning-input label="Co masz do zrobienia dzisiaj?"></lightning-input>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                <lightning-button-icon icon-name="utility:add" title="Add todo" onclick={addToDoHandle}></lightning-button-icon>
+            </lightning-layout-item>
+        </lightning-layout>
+    
+        <!--{task}
+        
+        <template iterator:it={taskList}>
+            <li key={it.value}>
+                {it.value}
+            </li>
+        </template> -->
+    
+        <template for:each={taskList} for:item="item">
+            <lightning-card key={item}>
+                {item}
+                <lightning-button-stateful
+                        label-when-off="Do"
+                        label-when-on="Done"
+                        label-when-hover="Do again"
+                        icon-name-when-off="utility:add"
+                        icon-name-when-on="utility:check"
+                        icon-name-when-hover="utility:close"
+                        selected={isSelected}
+                        onclick={handleClick}>
+                </lightning-button-stateful>
+            </lightning-card>
+        </template>
+    
+    
+    </div>
+    </template>
+    
