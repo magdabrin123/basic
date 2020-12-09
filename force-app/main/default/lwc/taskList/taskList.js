@@ -15,11 +15,15 @@ export default class TaskList extends LightningElement {
     @api number; 
     @track tasks;
     
+    wiredResults;
+
     @wire(getRecords)
-    wiredRecord({error, data}) {
-        if(data) {
-            this.tasks = data;
-        }else if(error) {
+    wiredRecord(result) {
+        this.wiredResults = result;
+        console.log('CHILD: Hello from wired');
+        if(result.data) {
+            this.tasks = result.data;
+        }else if(result.error) {
             this.dispatchEvent(
                 new ShowToastEvent({
                     title:'Error',
@@ -34,10 +38,12 @@ export default class TaskList extends LightningElement {
     constructor(){
         super();
         console.log('CHILD :: hello from constructor');
+        //throw new Error('Child throws in constructor');
     }
 
     connectedCallback(){
         console.log('CHILD :: hello from connectedCallBack');
+        //throw new Error('Child throws in connectedCallBack');
     }
 
     renderedCallback(){
@@ -50,9 +56,6 @@ export default class TaskList extends LightningElement {
         }else{
             inputBox.label = "To do";
         }
-
-        //return refreshApex(this.tasks);
-        throw new Error('Child throws in renderedCallback');
     }
 
     disconnectedCallback(){
@@ -93,6 +96,8 @@ export default class TaskList extends LightningElement {
                         variant: 'success'
                     })
                 );
+                refreshApex(this.wiredResults);
+
             }).catch(error => {
                 this.dispatchEvent(
                     new ShowToastEvent({
@@ -102,9 +107,6 @@ export default class TaskList extends LightningElement {
                     }),
                 );
             })
-        
-        refreshApex(this.tasks);
-
     }
 
     get options(){

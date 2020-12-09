@@ -5,7 +5,7 @@ export default class App extends LightningElement {
     @track time = "12:19";  
 
     isSelected = false;
-    visible = false;
+    visible = true;
     @api number;  
 
     constructor(){
@@ -29,22 +29,22 @@ export default class App extends LightningElement {
 
     renderedCallback(){
         console.log('PARENT :: hello from rendered CallBack');
-
+        /*
         this.getTime();
         setInterval(()=>{
             this.getTime();
-        },1000);
+        },1000);*/
     }
 
     disconnectedCallback(){
         console.log('PARENT :: hello from disconnectedCallBack');
     }
 
-    errorCallback(error, stack){
+    /*errorCallback(error, stack){
         console.log('PARENT :: hello from errorCallBack');
         console.log('#### error : ', error);
         console.log('#### stack : ', stack);
-    }
+    }*/
 
     getTime(){
         const date = new Date();
