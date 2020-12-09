@@ -12,47 +12,8 @@
         <lightning-input type="checkBox" label="Pokaż liste zadań" onchange={changeVisible}></lightning-input>
     
         <template if:true={visible}>
-            <lightning-layout>
-                <lightning-layout-item padding="around-small">
-                    <lightning-input data-id="task" label="Co masz do zrobienia dzisiaj?"></lightning-input>
-                
-                <lightning-combobox
-                    name="priority"
-                    label="Ważność"
-                    value={value}
-                    options={options}></lightning-combobox>
-                </lightning-layout-item>
-                <lightning-layout-item padding="around-small">
-                    <lightning-button-icon icon-name="utility:add" title="Add todo" onclick={addToDoHandle}></lightning-button-icon>
-                </lightning-layout-item>
-            </lightning-layout>
-    
-            <!--{task}
-            
-            <template iterator:it={taskList}>
-                <li key={it.value}>
-                    {it.value}
-                </li>
-            </template> -->
-        
-            <template for:each={taskList} for:item="item">
-                <lightning-card key={item.Name}>
-                    {item.Name} 
-                    -----
-                    {item.Priority}
-                    <lightning-button-stateful
-                            label-when-off="Do"
-                            label-when-on="Done"
-                            label-when-hover="Do again"
-                            icon-name-when-off="utility:add"
-                            icon-name-when-on="utility:check"
-                            icon-name-when-hover="utility:close"
-                            selected={isSelected}
-                            onclick={handleClick}>
-                    </lightning-button-stateful>
-                </lightning-card>
-            </template>
+            <c-task-list number={number}></c-task-list>
         </template>    
     
     </div>
-    </template>
+</template>
